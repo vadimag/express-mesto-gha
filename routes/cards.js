@@ -14,7 +14,7 @@ router.put('/:cardId/likes', addCardLike);
 router.delete('/:cardId/likes', delCardLike);
 
 router.use((req, res) => {
-  res.status(400).end();
+  res.status(400).send({ message: 'указан неправильный путь' });
 });
 
 module.exports = router;
