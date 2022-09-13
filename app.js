@@ -9,7 +9,6 @@ const routerCards = require('./routes/cards');
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
-// mongoose.connect('mongodb://192.168.125.111:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -26,5 +25,8 @@ app.use((req, res, next) => {
 
 app.use('/users', routerUsers);
 app.use('/cards', routerCards);
+app.use((req, res) => {
+  res.status(400).end();
+});
 
 app.listen(PORT);

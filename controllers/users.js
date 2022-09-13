@@ -20,7 +20,6 @@ const getUserById = (req, res) => {
       res.send(user);
     })
     .catch((error) => {
-      console.log(error.name);
       if (error.name === 'CastError') {
         res.status(400).send({ message: 'Переданы некорректные данные при поиске пользователя' });
       } else {
