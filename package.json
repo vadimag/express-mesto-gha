@@ -1,0 +1,33 @@
+{
+  "name": "express-mesto-gha",
+  "version": "1.0.0",
+  "description": "learn project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint . ",
+    "start": "set PORT=3000 && node app.js",
+    "dev": "set PORT=3000 && nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadimag/express-mesto-gha.git"
+  },
+  "author": "Magafurov Vadim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vadimag/express-mesto-gha/issues"
+  },
+  "homepage": "https://github.com/vadimag/express-mesto-gha#readme",
+  "devDependencies": {
+    "eslint": "^8.23.1",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "express": "^4.18.1",
+    "mongoose": "^5.12.3"
+  }
+}
