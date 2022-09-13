@@ -34,8 +34,12 @@ const delCardById = (req, res) => {
       }
       res.send(card);
     })
-    .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+    .catch((error) => {
+      if (error.name === 'CastError') {
+        res.status(400).send({ message: 'Переданы некорректные данные для удаления карточки' });
+      } else {
+        res.status(500).send({ message: 'На сервере произошла ошибка' });
+      }
     });
 };
 
