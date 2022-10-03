@@ -39,3 +39,7 @@
 * Mongo DB
 * Mongoose
 * Middleware
+* RegExp
+* Централизованная обработка ошибок
+
+[ссылка на репозиторй  - https://github.com/vadimag/express-mesto-gha](https://github.com/vadimag/express-mesto-gha)
