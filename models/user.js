@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const isEmail = require('validator/lib/isEmail');
 const UnauthorizedError = require('../errors/unauthorized-err');
+const { urlRegex } = require('../utils/consts');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,9 +37,8 @@ const userSchema = new mongoose.Schema({
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator: (v) => {
-        const urlRegex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-        // console.log(urlRegex.test(v));
-        return urlRegex.test(v);
+        const regex = urlRegex;
+        return regex.test(v);
       },
       message: () => 'is not a valid url!',
     },

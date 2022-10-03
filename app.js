@@ -12,11 +12,11 @@ const {
   login,
 } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-err');
+const { urlRegex } = require('./utils/consts');
 
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
-// mongoose.connect('mongodb://192.168.125.111:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -38,7 +38,7 @@ app.use('/signup', celebrate({
     password: Joi.string().required().min(8),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().regex(/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/),
+    avatar: Joi.string().regex(urlRegex),
   }),
 }), createUser);
 
@@ -54,7 +54,6 @@ app.use(errors());
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
-  // console.log(err);
   res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
 });
 

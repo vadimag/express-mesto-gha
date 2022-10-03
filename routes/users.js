@@ -8,6 +8,7 @@ const {
   updateUserAvatar,
 } = require('../controllers/users');
 const { auth } = require('../moddlewares/auth');
+const { urlRegex } = require('../utils/consts');
 
 router.use(auth);
 router.get('/', getUsers);
@@ -27,7 +28,7 @@ router.patch('/me', celebrate({
 
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().regex(/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/),
+    avatar: Joi.string().regex(urlRegex),
   }),
 }), updateUserAvatar);
 
