@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const {
   getCards,
   createCard,
@@ -8,13 +9,16 @@ const {
 } = require('../controllers/cards');
 
 router.get('/', getCards);
-router.post('/', createCard);
+
+router.post('/', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    link: Joi.string().required().min(4),
+  }),
+}), createCard);
+
 router.delete('/:cardId', delCardById);
 router.put('/:cardId/likes', addCardLike);
 router.delete('/:cardId/likes', delCardLike);
-
-router.use((req, res) => {
-  res.status(404).send({ message: 'указан неправильный путь' });
-});
 
 module.exports = router;
