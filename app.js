@@ -16,7 +16,8 @@ const { urlRegex } = require('./utils/consts');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+// mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://192.168.125.111:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -25,14 +26,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(bodyParser.json());
 
-app.use('/signin', celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
 }), login);
 
-app.use('/signup', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
