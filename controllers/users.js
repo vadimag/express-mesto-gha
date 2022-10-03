@@ -80,7 +80,12 @@ const createUser = (req, res, next) => {
         avatar,
       })
         .then((user) => {
-          res.send({ _id: user._id, email: user.email });
+          res.send({
+            id: user._id,
+            name: user.name,
+            avatar: user.avatar,
+            about: user.about,
+          });
         })
         .catch((err) => {
           if (err.code === 11000) {
