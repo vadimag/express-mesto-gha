@@ -12,7 +12,11 @@ const { auth } = require('../moddlewares/auth');
 router.use(auth);
 router.get('/', getUsers);
 router.get('/me', getUserProfile);
-router.get('/:userId', getUserById);
+router.get('/:userId', celebrate({
+  params: Joi.object().keys({
+    userId: Joi.string().alphanum().length(24),
+  }),
+}), getUserById);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({

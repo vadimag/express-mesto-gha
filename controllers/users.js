@@ -24,41 +24,6 @@ const getUserById = (req, res, next) => {
     .catch(next);
 };
 
-// const createUser = (req, res) => {
-//   const {
-//     name,
-//     email,
-//     password,
-//     about,
-//     avatar,
-//   } = req.body;
-//   if (!email || !password) {
-//     return res.status(400).
-// send({ message: 'Переданы некорректные данные при создании пользователя' });
-//   }
-//   bcrypt.hash(password, 10)
-//     .then((hash) => {
-//       User.create({
-//         name,
-//         email,
-//         password: hash,
-//         about,
-//         avatar,
-//       })
-//         .then((user) => {
-//           res.send({ _id: user._id, email: user.email });
-//         })
-//         .catch((error) => {
-//           if (error.name === 'ValidationError') {
-//             res.status(400).
-// send({ message: 'Переданы некорректные данные при создании пользователя' });
-//           } else {
-//             res.status(500).send({ message: 'На сервере произошла ошибка' });
-//           }
-//         });
-//     });
-// };
-
 const createUser = (req, res, next) => {
   const {
     name,
@@ -99,23 +64,6 @@ const createUser = (req, res, next) => {
     });
 };
 
-// const login = (req, res) => {
-//   const { email, password } = req.body;
-//   if (!email) {
-//     res.
-// status(401).
-// send({ message: 'Переданы некорректные данные при аутентификации пользователя' });
-//   }
-//   return User.findUserByCredentials(email, password)
-//     .then((user) => {
-//       const token = getToken(user._id);
-//       res.status(200).send(token);
-//     })
-//     .catch((error) => {
-//       res.status(401).send({ message: error.message });
-//     });
-// };
-
 const login = (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
@@ -135,25 +83,6 @@ const login = (req, res, next) => {
     });
 };
 
-// const updateUserProfile = (req, res) => {
-//   const { name, about } = req.body;
-//   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-//     .then((user) => {
-//       if (!user) {
-//         res.status(404).send({ message: 'Пользователь по указанному _id не найден' });
-//         return;
-//       }
-//       res.send(user);
-//     })
-//     .catch((error) => {
-//       if (error.name === 'ValidationError') {
-//         res.status(400).send({ message: 'Переданы некорректные данные при обновлении профиля' });
-//       } else {
-//         res.status(500).send({ message: 'На сервере произошла ошибка' });
-//       }
-//     });
-// };
-
 const updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
@@ -172,18 +101,6 @@ const updateUserProfile = (req, res, next) => {
     });
 };
 
-// const getUserProfile = (req, res) => {
-//   User.findById(req.user._id)
-//     .then((user) => {
-//       if (!user) {
-//         res.status(404).send({ message: 'Пользователь по указанному _id не найден' });
-//         return;
-//       }
-//       res.send(user);
-//     })
-//     .catch(() => res.status(500).send({ message: 'На сервере произошла ошибка' }));
-// };
-
 const getUserProfile = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
@@ -194,25 +111,6 @@ const getUserProfile = (req, res, next) => {
     })
     .catch(next);
 };
-
-// const updateUserAvatar = (req, res) => {
-//   const { avatar } = req.body;
-//   User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-//     .then((user) => {
-//       if (!user) {
-//         res.status(404).send({ message: 'Пользователь по указанному _id не найден' });
-//         return;
-//       }
-//       res.send(user);
-//     })
-//     .catch((error) => {
-//       if (error.name === 'ValidationError') {
-//         res.status(400).send({ message: 'Переданы некорректные данные при обновлении аватара' });
-//       } else {
-//         res.status(500).send({ message: 'На сервере произошла ошибка' });
-//       }
-//     });
-// };
 
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
