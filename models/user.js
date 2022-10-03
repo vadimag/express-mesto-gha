@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     validate: {
       validator: (v) => {
         const urlRegex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-        console.log(urlRegex.test(v));
+        // console.log(urlRegex.test(v));
         return urlRegex.test(v);
       },
       message: () => 'is not a valid url!',
@@ -45,6 +45,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {

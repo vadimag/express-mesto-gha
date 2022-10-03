@@ -33,7 +33,8 @@ const getUserById = (req, res, next) => {
 //     avatar,
 //   } = req.body;
 //   if (!email || !password) {
-//     return res.status(400).send({ message: 'Переданы некорректные данные при создании пользователя' });
+//     return res.status(400).
+// send({ message: 'Переданы некорректные данные при создании пользователя' });
 //   }
 //   bcrypt.hash(password, 10)
 //     .then((hash) => {
@@ -49,7 +50,8 @@ const getUserById = (req, res, next) => {
 //         })
 //         .catch((error) => {
 //           if (error.name === 'ValidationError') {
-//             res.status(400).send({ message: 'Переданы некорректные данные при создании пользователя' });
+//             res.status(400).
+// send({ message: 'Переданы некорректные данные при создании пользователя' });
 //           } else {
 //             res.status(500).send({ message: 'На сервере произошла ошибка' });
 //           }
@@ -94,7 +96,9 @@ const createUser = (req, res, next) => {
 // const login = (req, res) => {
 //   const { email, password } = req.body;
 //   if (!email) {
-//     res.status(401).send({ message: 'Переданы некорректные данные при аутентификации пользователя' });
+//     res.
+// status(401).
+// send({ message: 'Переданы некорректные данные при аутентификации пользователя' });
 //   }
 //   return User.findUserByCredentials(email, password)
 //     .then((user) => {
