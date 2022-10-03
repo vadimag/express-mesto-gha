@@ -7,7 +7,9 @@ const {
   getUserProfile,
   updateUserAvatar,
 } = require('../controllers/users');
+const { auth } = require('../moddlewares/auth');
 
+router.use(auth);
 router.get('/', getUsers);
 router.get('/me', getUserProfile);
 router.get('/:userId', getUserById);

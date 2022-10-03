@@ -11,7 +11,6 @@ const {
   createUser,
   login,
 } = require('./controllers/users');
-const { auth } = require('./moddlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 
 const app = express();
@@ -43,17 +42,14 @@ app.use('/signup', celebrate({
   }),
 }), createUser);
 
-// app.use('/signup', createUser);
-
-app.use(auth);
 app.use('/users', routerUsers);
 app.use('/cards', routerCards);
-
-app.use(errors());
 
 app.use((req, res, next) => {
   next(new NotFoundError('path not found'));
 });
+
+app.use(errors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

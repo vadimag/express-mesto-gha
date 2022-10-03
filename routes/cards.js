@@ -7,7 +7,9 @@ const {
   addCardLike,
   delCardLike,
 } = require('../controllers/cards');
+const { auth } = require('../moddlewares/auth');
 
+router.use(auth);
 router.get('/', getCards);
 
 router.post('/', celebrate({
