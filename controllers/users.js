@@ -124,7 +124,7 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = getToken(user._id);
-      res.status(200).send(token);
+      res.status(200).send({ token });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
