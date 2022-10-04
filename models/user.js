@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
         const regex = urlRegex;
         return regex.test(v);
       },
-      message: () => 'is not a valid url!',
+      message: () => 'is not a valid url',
     },
   },
 });

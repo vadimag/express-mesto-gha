@@ -10,7 +10,13 @@ const getUsers = (req, res, next) => {
     .then((data) => {
       res.send(data);
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные пользователя'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 const getUserById = (req, res, next) => {
@@ -32,9 +38,6 @@ const createUser = (req, res, next) => {
     about,
     avatar,
   } = req.body;
-  if (!email || !password) {
-    throw new BadRequestError('Переданы некорректные данные при создании пользователя');
-  }
   bcrypt.hash(password, 10)
     .then((hash) => {
       User.create({
@@ -66,9 +69,6 @@ const createUser = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  if (!email) {
-    throw new BadRequestError('Переданы некорректные данные при аутентификации пользователя');
-  }
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = getToken(user._id);
