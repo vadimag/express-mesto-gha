@@ -10,13 +10,7 @@ const getUsers = (req, res, next) => {
     .then((data) => {
       res.send(data);
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные пользователя'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 const getUserById = (req, res, next) => {
@@ -27,7 +21,13 @@ const getUserById = (req, res, next) => {
       }
       res.send(user);
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные пользователя'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 const createUser = (req, res, next) => {
@@ -74,13 +74,7 @@ const login = (req, res, next) => {
       const token = getToken(user._id);
       res.status(200).send({ token });
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 const updateUserProfile = (req, res, next) => {
